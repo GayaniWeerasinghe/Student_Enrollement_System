@@ -1,14 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {
 
     const navigate = useNavigate();
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-    const logout = () => {
-        localStorage.removeItem("isLoggedIn");
-        window.location.reload();
-    };
+    const username = localStorage.getItem("username");
+
     return (
         <nav
             className="navbar navbar-expand-lg"
@@ -41,9 +39,9 @@ function Navbar() {
                     ) : (
                         <>
                         <i className="fa-solid fa-user fa-lg"></i>&nbsp;&nbsp;
-                        <Link className="text-dark text-decoration-none">
-                            Admin
-                        </Link>
+                        <span className="text-dark">
+                            {username}
+                        </span>
                         </>
                     )}
                 </div>

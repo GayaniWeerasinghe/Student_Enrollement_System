@@ -23,6 +23,7 @@ function Login() {
                 "token",
                 res.data.token
             );
+            localStorage.setItem("username", username);
             alert("Login Successful");
             navigate('/');
             window.location.reload();
