@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import Login from './components/Login';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
+import AllCourses from './components/AllCourses';
 
 function Layout() {
 
@@ -24,6 +25,7 @@ function Layout() {
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<Dashboard />} />
         <Route path="/students" element={<AllStudents />} />
+        <Route path="/courses" element={<AllCourses />} />
       </Routes>
     </>
   );

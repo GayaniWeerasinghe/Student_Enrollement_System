@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -10,6 +10,17 @@ function AddStudent({show, onClose, getStudents}) {
     const [phone,setPhone] = useState("");
     const [course,setCourse] = useState("");
     const [batch,setBatch] = useState("");
+    const [courses, setCourses] = useState([]);
+
+    useEffect(() => {
+            getCourses();
+        }, []);
+    
+    const getCourses = () => {
+        axios.get('http://localhost:8070/courses/')
+                .then((res) => setCourses(res.data))
+                .catch((err) => alert(err));
+    };
 
     function saveStudent(e){
         e.preventDefault();
@@ -116,8 +127,9 @@ function AddStudent({show, onClose, getStudents}) {
                                             setCourse(e.target.value);
                                         }}>
                                         <option>Select Course</option>
-                                        <option>MERN Stack</option>
-                                        <option>Python</option>
+                                        {courses.map((course) => (
+                                            <option>{course.courseName}</option>
+                                        ))}
                                     </select>
                                 </div>
                                 <div className="col-md-6 mb-3">
