@@ -3,15 +3,14 @@ let Student = require("../models/students");
 
 //add task -- http://localhost:8070/students/add
 router.route("/add").post((req,res) => {
-    const {studentId,name,email,phone,course,batch} = req.body;  //destructure
+    const {studentId,name,email,phone} = req.body;  //destructure
 
     const newStudent = new Student({
         studentId,
         name,
         email,
         phone,
-        course,
-        batch
+        courses:[]
     })
         
     newStudent.save().then(()=> {
@@ -34,23 +33,45 @@ router.route("/").get((req,res) => {
 
 //update a student -- http://localhost:8070/students/update/ghj32gftredhhkjk
 router.route("/update/:id").put(async(req,res)=>{
-    const ID = req.params.id;
-    const {studentId,name,email,phone,course,batch} = req.body;
-    const updateStudent ={
-        studentId,
-        name,
-        email,
-        phone,
-        course,
-        batch
-    }
+    try {
+        const ID = req.params.id;
+        const student = await Student.findById(ID);
+        if(!student){
+            return res.status(404).send({
+                status:"Student not found"
+            });
+        }
+        const {studentId,name,email,phone,course} = req.body;
+        // update only if data exists
+        if(studentId){
+            student.studentId = studentId;
+        }
+        if(name){
+            student.name = name;
+        }
+        if(email){
+            student.email = email;
+        }
+        if(phone){
+            student.phone = phone;
+        }
 
-    await Student.findByIdAndUpdate(ID,updateStudent).then((updateStudent)=>{
-        res.status(200).send({status:'Student Updated',students:updateStudent})
-    }).catch((err)=>{
-        res.status(500).send({status:'Error with updating',error:err.message})
-    })
-})
+        // add course if not already exists
+        if(course && !student.courses.includes(course)){
+            student.courses.push(course);
+        }
+        await student.save();
+        res.status(200).send({
+            status:"Student Updated",
+            students:student
+        });
+    } catch(err){
+        res.status(500).send({
+            status:"Error with updating",
+            error:err.message
+        });
+    }
+});
 
 //delete a student -- http://localhost:8070/students/delete/ghj32gftredhhkjk
 router.route("/delete/:id").delete(async(req,res)=>{

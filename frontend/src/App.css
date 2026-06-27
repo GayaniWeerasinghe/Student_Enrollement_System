@@ -53,3 +53,27 @@
 .theme-btn:focus {
     box-shadow: none;
 }
+
+/* enrollment container */
+.page-wrapper {
+    margin-left:270px;
+    padding:20px;
+}
+
+.enrollment-container {
+    width:100%;
+    max-width:900px;
+}
+
+.enrollment-container .form-select {
+    width:100%;
+}
+
+.table-responsive {
+    width:100%;
+    overflow-x:auto;
+}
+
+.table {
+    width:100%;
+}

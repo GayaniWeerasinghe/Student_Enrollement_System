@@ -62,7 +62,22 @@ function AllStudents() {
                                 <td>{student.name}</td>
                                 <td>{student.email}</td>
                                 <td>{student.phone}</td>
-                                <td>{student.course}</td>
+                                <td>
+                                    {student.courses && student.courses.length > 0 ? (
+                                        student.courses.map((course, index) => (
+                                            <span
+                                                key={index}
+                                                className="badge bg-success me-1"
+                                            >
+                                                {course}
+                                            </span>
+                                        ))
+                                    ) : (
+                                        <span className="text-muted">
+                                            No enrolled courses
+                                        </span>
+                                    )}
+                                </td>
                                 <td>
                                     <i style={{color:'#374151', cursor: 'pointer'}} className="fa-solid fa-pen-to-square" onClick={() => {
                                             setSelectedId(student._id);
@@ -75,7 +90,7 @@ function AllStudents() {
                     </tbody>
                 </table>
                 <div className="text-end mt-1">
-                <button className="btn theme-btn" onClick={() => setShowModal(true)}><i className="fa-sharp fa-solid fa-plus"></i>&nbsp;Register Student</button>
+                    <button className="btn theme-btn" onClick={() => setShowModal(true)}><i className="fa-sharp fa-solid fa-plus"></i>&nbsp;Register Student</button>
                 </div>
             </div>
             <AddStudent

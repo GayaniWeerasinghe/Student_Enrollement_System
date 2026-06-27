@@ -17,16 +17,12 @@ const studentSchema = new Schema({
     },
     phone:{
         type:String,
-        required:true 
-    },
-    course:{
-        type:String,
-        required:true 
-    },
-    batch:{
-        type:String,
         required:true
     },
+    courses: {
+        type: [String],
+        default: []
+    }
 })
 
 const Student = mongoose.model("Student",studentSchema); //create a collection

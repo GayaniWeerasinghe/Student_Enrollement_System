@@ -7,27 +7,12 @@ function EditStudent({show, onClose, getStudents, id}) {
     const [name,setName] = useState("");
     const [email,setEmail] = useState("");
     const [phone,setPhone] = useState("");
-    const [course,setCourse] = useState("");
-    const [batch,setBatch] = useState("");
-    const [courses, setCourses] = useState([]);
-
-    useEffect(() => {
-            getCourses();
-        }, []);
-    
-    const getCourses = () => {
-        axios.get('http://localhost:8070/courses/')
-                .then((res) => setCourses(res.data))
-                .catch((err) => alert(err));
-    };
 
     const data = {
         studentId: studentId,
         name: name,
         email: email,
         phone: phone,
-        course: course,
-        batch: batch
     }
 
     function loadStudent() {
@@ -36,9 +21,6 @@ function EditStudent({show, onClose, getStudents, id}) {
             setName(res.data.students.name);
             setEmail(res.data.students.email);
             setPhone(res.data.students.phone);
-            setCourse(res.data.students.course);
-            setBatch(res.data.students.batch);
-            console.log(res.data);
             
         }).catch((err) =>{
             alert(err);
@@ -141,37 +123,6 @@ function EditStudent({show, onClose, getStudents, id}) {
                                             setPhone(e.target.value);
                                         }}
                                     />
-                                </div>
-                                <div className="col-md-6 mb-3">
-                                    <label className="form-label">
-                                        Course
-                                    </label>
-                                    <select className="form-select"
-                                        id="course"
-                                        value={course}
-                                        onChange={(e) =>{
-                                            setCourse(e.target.value);
-                                        }}>
-                                        <option>Select Course</option>
-                                        {courses.map((course) => (
-                                            <option>{course.courseName}</option>
-                                        ))}
-                                    </select>
-                                </div>
-                                <div className="col-md-6 mb-3">
-                                    <label className="form-label">
-                                        Batch
-                                    </label>
-                                    <select className="form-select"
-                                        id="batch"
-                                        value={batch}
-                                        onChange={(e) =>{
-                                            setBatch(e.target.value);
-                                        }}>
-                                        <option>Select Batch</option>
-                                        <option>2026 A</option>
-                                        <option>2026 B</option>
-                                    </select>
                                 </div>
                             </div>
                         </div>

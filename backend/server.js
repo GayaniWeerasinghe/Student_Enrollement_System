@@ -29,6 +29,9 @@ app.use("/auth", authRouter);
 // Creating course routes
 const courseRouter = require("./routes/Courses");
 app.use("/courses", courseRouter);
+// Creating enrollments router
+const enrollmentRouter = require("./routes/Enrollments");
+app.use("/enrollments", enrollmentRouter);
 
 mongoose.connect(process.env.MONGO_URI)
 .then(() => {
