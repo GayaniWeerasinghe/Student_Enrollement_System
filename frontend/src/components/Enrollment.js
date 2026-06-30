@@ -70,6 +70,19 @@ function Enrollment() {
             <div className="enrollment-container">
                 <select className="form-select" value={selectedCourse}
                     onChange={(e) => setSelectedCourse(e.target.value)}>
+                    <option value="">Select Batch</option>
+                    {courses.map((course) => (
+                        <option
+                            key={course._id}
+                            value={course._id}
+                        >
+                            {course.courseName}
+                        </option>
+                    ))}
+                </select>
+                <br/>
+                <select className="form-select" value={selectedCourse}
+                    onChange={(e) => setSelectedCourse(e.target.value)}>
                     <option value="">Select Course</option>
                     {courses.map((course) => (
                         <option

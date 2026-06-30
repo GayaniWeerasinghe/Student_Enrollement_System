@@ -32,6 +32,9 @@ app.use("/courses", courseRouter);
 // Creating enrollments router
 const enrollmentRouter = require("./routes/Enrollments");
 app.use("/enrollments", enrollmentRouter);
+// Creating batch router
+const batchRouter = require("./routes/Batches");
+app.use("/batches", batchRouter);
 
 mongoose.connect(process.env.MONGO_URI)
 .then(() => {
