@@ -8,6 +8,7 @@ import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import AllCourses from './components/AllCourses';
 import Enrollment from './components/Enrollment';
+import AllBatches from './components/AllBatches';
 
 function Layout() {
 
@@ -26,6 +27,7 @@ function Layout() {
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<Dashboard />} />
         <Route path="/students" element={<AllStudents />} />
+        <Route path="/batches" element={<AllBatches />} />
         <Route path="/courses" element={<AllCourses />} />
         <Route path="/enrollment" element={<Enrollment />} />
       </Routes>

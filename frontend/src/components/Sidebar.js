@@ -17,6 +17,7 @@ function Sidebar() {
             <ul>
                 <li><Link className="text-decoration-none text-white" to="/"><i className="fa fa-tachometer" aria-hidden="true"></i>&nbsp;&nbsp;Dashboard</Link></li>
                 <li><Link className="text-decoration-none text-white" to="/students"><i className="fa fa-graduation-cap" aria-hidden="true"></i>&nbsp;&nbsp;Students</Link></li>
+                <li><Link className="text-decoration-none text-white" to="/batches"><i className="fa fa-book" aria-hidden="true"></i>&nbsp;&nbsp;Batches</Link></li>
                 <li><Link className="text-decoration-none text-white" to="/courses"><i className="fa fa-book" aria-hidden="true"></i>&nbsp;&nbsp;Courses</Link></li>
                 <li><Link className="text-decoration-none text-white" to="/enrollment"><i className="fa-solid fa-circle-plus"></i>&nbsp;&nbsp;Enrollments</Link></li>
                 <li><Link className="text-white text-decoration-none" onClick={logout}><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;Logout</Link></li>

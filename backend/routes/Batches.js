@@ -37,7 +37,7 @@ router.route("/update/:id").put(async(req,res)=>{
     const updateBatch ={
         batchId,
         batchName,
-        StartDate,
+        startDate,
         endDate
     }
 

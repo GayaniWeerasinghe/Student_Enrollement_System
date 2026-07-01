@@ -3,12 +3,15 @@ import axios from 'axios';
 
 function Enrollment() {
 
+    const [batches, setBatches] = useState([]);
     const [courses, setCourses] = useState([]);
     const [students, setStudents] = useState([]);
+    const [selectedBatch, setSelectedBatch] = useState("");
     const [selectedCourse, setSelectedCourse] = useState("");
     const [selectedStudents, setSelectedStudents] = useState([]);
 
     useEffect(() => {
+        getBatches();
         getCourses();
         getStudents();
     }, []);
@@ -16,6 +19,12 @@ function Enrollment() {
     const getCourses = () => {
         axios.get('http://localhost:8070/courses/')
              .then((res) => setCourses(res.data))
+             .catch((err) => alert(err));
+    };
+
+    const getBatches = () => {
+        axios.get('http://localhost:8070/batches/')
+             .then((res) => setBatches(res.data))
              .catch((err) => alert(err));
     };
 
@@ -54,6 +63,7 @@ function Enrollment() {
                     {
                         studentId: studentId,
                         courseId: selectedCourse,
+                        batch: selectedBatch
                     }
                 );
             }
@@ -69,14 +79,14 @@ function Enrollment() {
             <h2 className="mb-3">Enroll Students</h2>
             <div className="enrollment-container">
                 <select className="form-select" value={selectedCourse}
-                    onChange={(e) => setSelectedCourse(e.target.value)}>
+                    onChange={(e) => setSelectedBatch(e.target.value)}>
                     <option value="">Select Batch</option>
-                    {courses.map((course) => (
+                    {batches.map((batch) => (
                         <option
-                            key={course._id}
-                            value={course._id}
+                            key={batch._id}
+                            value={batch._id}
                         >
-                            {course.courseName}
+                            {batch.batchName}
                         </option>
                     ))}
                 </select>
@@ -102,7 +112,7 @@ function Enrollment() {
                                 <th></th>
                                 <th>ID</th>
                                 <th>Name</th>
-                                <th>Batch</th>
+                                <th>Email</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -130,7 +140,7 @@ function Enrollment() {
                                     </td>
                                     <td>{student.studentId}</td>
                                     <td>{student.name}</td>
-                                    <td>{student.batch}</td>
+                                    <td>{student.email}</td>
                                 </tr>
                             ))}
                         </tbody>
